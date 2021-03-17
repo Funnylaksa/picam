@@ -1,0 +1,6 @@
+#/bin/bash
+
+nohup source /home/pi/flask/flask-env/bin/activate > /dev/null 2>&1 &
+nohup /home/pi/flask/flask-env/bin/python /home/pi/flask/app.py >/dev/null 2>&1 &
+#mega-login login 'ivan.lee.ch8@gmail.com' 'pwd'
+mega-login

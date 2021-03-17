@@ -1,0 +1,14 @@
+#/bin/bash
+
+kill -9 $(ps -ef | grep -i pir.py | awk '{print $2}')
+kill -9 $(ps -ef | grep -i app.py | awk '{print $2}')
+mega-mv /MEGAsync/temp/*.mp4 /MEGAsync/pi_vid/
+mega-mv /MEGAsync/temp/*.jpg /MEGAsync/pi_photo/
+rm -rf /home/pi/flask/video/.debris
+
+date=$(date '+%Y%m%d' --date "-7 day")
+echo date
+
+mega-rm /MEGAsync/pi_vid/*$date*
+mega-rm /MEGAsync/pi_photo/*$date*
+

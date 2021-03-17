@@ -2,12 +2,41 @@
 # Source code from the official PiCamera package
 # http://picamera.readthedocs.io/en/latest/recipes2.html#web-streaming
 
+#import os
 import io
 import picamera
 import logging
 import socketserver
 from threading import Condition
 from http import server
+from picamera import mmal 
+import ctypes as ct
+from datetime import datetime
+import os
+
+# Set config
+start = datetime.now()
+dt_start_string = start.strftime("%Y%m%d_%H%M%S") 
+photo_path = "/home/pi/flask/photo/"
+photo = os.path.join(photo_path, dt_start_string+'.jpg')
+print(photo)
+
+
+class PiCamera2(picamera.PiCamera):
+    AWB_MODES = {
+        'off':           mmal.MMAL_PARAM_AWBMODE_OFF,
+        'auto':          mmal.MMAL_PARAM_AWBMODE_AUTO,
+        'sunlight':      mmal.MMAL_PARAM_AWBMODE_SUNLIGHT,
+        'cloudy':        mmal.MMAL_PARAM_AWBMODE_CLOUDY,
+        'shade':         mmal.MMAL_PARAM_AWBMODE_SHADE,
+        'tungsten':      mmal.MMAL_PARAM_AWBMODE_TUNGSTEN,
+        'fluorescent':   mmal.MMAL_PARAM_AWBMODE_FLUORESCENT,
+        'incandescent':  mmal.MMAL_PARAM_AWBMODE_INCANDESCENT,
+        'flash':         mmal.MMAL_PARAM_AWBMODE_FLASH,
+        'horizon':       mmal.MMAL_PARAM_AWBMODE_HORIZON,
+        'greyworld':     ct.c_uint32(10)
+        }
+
 
 PAGE="""\
 <html>
@@ -83,10 +112,16 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
 
-with picamera.PiCamera(resolution='1280x720', framerate=24) as camera:
+with PiCamera2(resolution='1280x720', framerate=24) as camera:
+    #camera.capture(photo)
     output = StreamingOutput()
     #Uncomment the next line to change your Pi's Camera rotation (in degrees)
+    camera.resolution = '2592x1944'
+    camera.framerate = 15
     camera.rotation = 180
+    camera.awb_mode = 'greyworld'
+    #camera.capture(photo)    
+
     camera.start_recording(output, format='mjpeg')
     try:
         address = ('', 8000)

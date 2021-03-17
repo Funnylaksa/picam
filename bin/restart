@@ -1,0 +1,8 @@
+#!/bin/sh
+
+date=`date '+%Y%m%d'`
+LOGFILE=/home/pi/flask/log/app.$date.log
+
+/home/pi/flask/bin/shutdown | tee -a $LOGFILE
+sleep 5
+/home/pi/flask/bin/startup | tee -a $LOGFILE
