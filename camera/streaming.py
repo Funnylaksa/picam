@@ -17,7 +17,7 @@ import os
 # Set config
 start = datetime.now()
 dt_start_string = start.strftime("%Y%m%d_%H%M%S") 
-photo_path = "/home/pi/flask/photo/"
+photo_path = "/home/pi/picam/photo/"
 photo = os.path.join(photo_path, dt_start_string+'.jpg')
 print(photo)
 

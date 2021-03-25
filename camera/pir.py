@@ -10,7 +10,7 @@ dt_start_string = start.strftime("%Y%m%d_%H%M%S")
 date_string = start.strftime("%Y%m%d")
 
 #Create and configure logger 
-logging.basicConfig(filename="/home/pi/flask/log//app." + date_string + ".log", 
+logging.basicConfig(filename="/home/pi/picam/log//app." + date_string + ".log", 
                     format='%(asctime)s %(message)s', 
                     filemode='a') 
   
@@ -38,13 +38,13 @@ while True:
         now = datetime.now()
         dt_string = now.strftime("%Y%m%d_%H%M%S")
         print("date and time =", dt_string)
-        logger.info("PIR Sensor triggered. 5 sec video captured --- ")
+        logger.info("PIR Sensor triggered. Capturing! --- ")
         logger.info("---")
         
-        photo = "/home/pi/flask/video/{datetime}".format(datetime = dt_string)
+        photo = "/home/pi/picam/mega_temp/{datetime}".format(datetime = dt_string)
         os.system("raspistill -awb greyworld  -o {photo}.jpg -rot 180".format(photo=photo))
 
-        vid = "/home/pi/flask/video/{datetime}".format(datetime = dt_string)
+        vid = "/home/pi/picam/mega_temp/{datetime}".format(datetime = dt_string)
         #os.system("raspivid -awb greyworld -o {vid}.h264 -rot 180 -t 3000".format(vid=vid))
         time.sleep(5)
         #os.system("MP4Box -add {vid}.h264 {vid}.mp4".format(vid=vid))  

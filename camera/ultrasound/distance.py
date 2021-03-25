@@ -84,8 +84,8 @@ while True:
                 dt_string = now.strftime("%Y%m%d_%H%M%S")
                 logger.info("Distance Sensor triggered. 5 sec video captured --- " + "Distance: %.1f cm" % distance)
                 #os.system("raspistill  -o /home/pi/flask/photo/" + dt_string + ".jpg -rot 180")
-                os.system("raspivid -awb greyworld -o /home/pi/flask/video/" + dt_string + ".h264 -rot 180 -t 5000 | tee -a /home/pi/flask/log/app." + date_string + ".log")
-                #os.system("raspivid -awb greyworld -o /home/pi/flask/video/test.h264 -rot 180 -t 5000")
+                os.system("raspivid -awb greyworld -o /home/pi/flask/mega_temp/" + dt_string + ".h264 -rot 180 -t 5000 | tee -a /home/pi/flask/log/app." + date_string + ".log")
+                #os.system("raspivid -awb greyworld -o /home/pi/flask/mega_temp/test.h264 -rot 180 -t 5000")
                 print('5 sec video')
                 timed_earlier = False
             else:

@@ -24,7 +24,7 @@ GPIO.setup(pinTrigger, GPIO.OUT)
 GPIO.setup(pinEcho, GPIO.IN)
 @app.route("/distance")
 def distance():
-    log = logging.getLogger("/home/pi/flask/app.log")
+    log = logging.getLogger("/home/pi/picam/app.log")
     while True:
         # set Trigger to HIGH
         GPIO.output(pinTrigger, True)
@@ -49,7 +49,7 @@ def distance():
         if distance < 68:
             now = datetime.now()
             dt_string = now.strftime("%d%m%Y%H%M%S")
-            os.system("raspivid  -o /home/pi/flask/video/" + dt_string + ".h264 -rot 180 -t 10000")
+            os.system("raspivid  -o /home/pi/picam/mega_temp/" + dt_string + ".h264 -rot 180 -t 10000")
             datetime = ("date and time =", dt_string)
             print(datetime)
             log.info(datetime)
@@ -67,14 +67,14 @@ def hello():
 def stream():
     #now = datetime.now()
     #dt_string = now.strftime("%Y%m%d_%H%M%S")
-    #photo = "/home/pi/flask/photo/{datetime}".format(datetime = dt_string)
+    #photo = "/home/pi/picam/photo/{datetime}".format(datetime = dt_string)
     #os.system("raspistill -awb greyworld  -o {photo}.jpg -rot 180".format(photo=photo))
 
-    subprocess.Popen(["/usr/bin/python3", "/home/pi/flask/camera/streaming.py"], stdout=subprocess.PIPE)
-    subprocess.Popen(["/home/pi/flask/camera/killstream.sh"], stdout=subprocess.PIPE)
+    subprocess.Popen(["/usr/bin/python3", "/home/pi/picam/camera/streaming.py"], stdout=subprocess.PIPE)
+    subprocess.Popen(["/home/pi/picam/camera/killstream.sh"], stdout=subprocess.PIPE)
     time.sleep(3)
     return redirect("http://leetv.ddns.net:8000")
 
 if (__name__ == "__main__"):
-    subprocess.Popen(["/usr/bin/python", "/home/pi/flask/camera/pir.py"], stdout=subprocess.PIPE)
+    subprocess.Popen(["/usr/bin/python", "/home/pi/picam/camera/pir.py"], stdout=subprocess.PIPE)
     app.run(host='0.0.0.0', port = 5000)

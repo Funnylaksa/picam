@@ -70,7 +70,7 @@ while True:
         logger.info("Distance Sensor triggered. 5 sec video captured --- " + "Distance: %.1f cm" % distance)
         logger.info("---")
         #os.system("raspistill  -o /home/pi/flask/photo/" + dt_string + ".jpg -rot 180")
-        os.system("raspivid  -o /home/pi/flask/video/" + dt_string + ".h264 -rot 180 -t 5000")
+        os.system("raspivid  -o /home/pi/flask/mega_temp/" + dt_string + ".h264 -rot 180 -t 5000")
 
         
     time.sleep(2)
