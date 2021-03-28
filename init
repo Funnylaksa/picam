@@ -1,0 +1,6 @@
+#apt-get install vim git gdebi-core python3-pip
+#pip3 install picamera
+
+mkdir mega_temp log
+
+
