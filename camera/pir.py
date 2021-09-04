@@ -39,11 +39,12 @@ def capture():
     os.system("raspistill -awb greyworld  -o {photo}.jpg -rot 180".format(photo=photo))
     
     #vid = "/home/pi/picam/mega_temp/{datetime}".format(datetime = dt_string)
-    #os.system("raspivid -awb greyworld -o {vid}.h264 -rot 180 -t 3000".format(vid=vid))
-    time.sleep(3)
+    #os.system("raspivid -awb greyworld -o {vid}.h264 -rot 180 -t 8000".format(vid=vid))
+    #time.sleep(8)
     #os.system("MP4Box -add {vid}.h264 {vid}.mp4".format(vid=vid))  
     #os.system("rm {vid}.h264".format(vid=vid))
     count = 0
+    time.sleep(3)
     logger.info("Capturing Ends")
 
 # Start here
@@ -60,7 +61,7 @@ while True:
     if triggered:
         if sensor_value:
             sensor_value_count+=1
-            if sensor_value_count % 8 == 0:
+            if sensor_value_count % 5 == 0:
                 time.sleep(4)
             if sensor_value_count % 3 == 0:
                 capture()
