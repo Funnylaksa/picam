@@ -69,10 +69,11 @@ while True:
         elif trigger_count == 9:
             triggered = False
             trigger_count = 0
+            logger.info("pir sensor not triggered after 10 seconds. Reset counters"))
         else:
             trigger_count += 1
-        print('trig_count, sensor_val_count:', trigger_count, sensor_value_count)    
-        logger.info("trig_count, sensor_val_count: {}, {}".format(trigger_count, sensor_value_count))
+        print('trigger_count, sensor_val_count:', trigger_count, sensor_value_count)    
+        logger.info("trigger_count, sensor_val_count: {}, {}".format(trigger_count, sensor_value_count))
     else:
         logger.info("Not activated")
         
@@ -82,8 +83,8 @@ while True:
         sensor_value_count=1
         triggered = True
         capture()
-        print('trig_count, sensor_val_count:', trigger_count, sensor_value_count)
-        logger.info("trig_count, sensor_val_count: {}, {}".format(trigger_count, sensor_value_count))
+        print('trigger_count, sensor_val_count:', trigger_count, sensor_value_count)
+        logger.info("trigger_count, sensor_val_count: {}, {}".format(trigger_count, sensor_value_count))
     time.sleep(1)
 
 

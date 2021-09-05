@@ -1,5 +1,12 @@
-#apt-get install vim git gdebi-core python3-pip
+#apt-get install vim git gdebi-core python3-pip libc-ares2 libcrypto++6
 #pip3 install picamera
+
+## https://codeyarns.com/tech/2019-05-18-how-to-sync-mega-on-raspbian.html
+#sudo dpkg -i megacmd-Raspbian_9.0_armhf.deb
+#mega-login
+#mega-sync /home/pi/picam/mega_temp /MEGAsync/temp
+
+
 
 mkdir mega_temp log
 
