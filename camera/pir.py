@@ -10,7 +10,7 @@ dt_start_string = start.strftime("%Y%m%d_%H%M%S")
 date_string = start.strftime("%Y%m%d")
 
 #Create and configure logger 
-logging.basicConfig(filename="/home/pi/picam/log//app." + date_string + ".log", 
+logging.basicConfig(filename="/home/pi/picam/log/app." + date_string + ".log", 
                     format='%(asctime)s %(message)s', 
                     filemode='a') 
   

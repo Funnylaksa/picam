@@ -8,6 +8,20 @@ import subprocess
 from datetime import datetime
 import logging
 
+#Add logging
+start = datetime.now()
+dt_start_string = start.strftime("%Y%m%d_%H%M%S")
+date_string = start.strftime("%Y%m%d")
+
+#Create and configure logger
+logging.basicConfig(filename="/home/pi/picam/log/stream." + date_string + ".log",
+                    format='%(asctime)s %(message)s',
+                    filemode='a')
+
+#Creating an object
+logger=logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
 '''
 # use Raspberry Pi board pin numbers
 GPIO.setmode(GPIO.BCM)
@@ -69,7 +83,7 @@ def stream():
     #dt_string = now.strftime("%Y%m%d_%H%M%S")
     #photo = "/home/pi/picam/photo/{datetime}".format(datetime = dt_string)
     #os.system("raspistill -awb greyworld  -o {photo}.jpg -rot 180".format(photo=photo))
-
+    logger.info("Steaming activated")
     subprocess.Popen(["/usr/bin/python3", "/home/pi/picam/camera/streaming.py"], stdout=subprocess.PIPE)
     subprocess.Popen(["/home/pi/picam/camera/killstream.sh"], stdout=subprocess.PIPE)
     time.sleep(3)

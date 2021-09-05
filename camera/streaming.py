@@ -21,7 +21,6 @@ photo_path = "/home/pi/picam/photo/"
 photo = os.path.join(photo_path, dt_start_string+'.jpg')
 print(photo)
 
-
 class PiCamera2(picamera.PiCamera):
     AWB_MODES = {
         'off':           mmal.MMAL_PARAM_AWBMODE_OFF,
